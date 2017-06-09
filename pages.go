@@ -89,38 +89,70 @@ func (s *PagesService) Get(ctx context.Context, path string) (*Page, error) {
 }
 
 type Page struct {
-	Page  PageInfo `json:"page"`
-	OK    bool     `json:"ok"`
-	Error string   `json:"error"`
+	Page  PageDetail `json:"page"`
+	OK    bool       `json:"ok"`
+	Error string     `json:"error"`
+}
+
+type Author struct {
+	Lang      string    `json:"lang"`
+	Status    int       `json:"status"`
+	ID        string    `json:"_id"`
+	Email     string    `json:"email"`
+	Username  string    `json:"username"`
+	Name      string    `json:"name"`
+	GoogleID  string    `json:"googleId"`
+	Image     string    `json:"image"`
+	Admin     bool      `json:"admin"`
+	CreatedAt time.Time `json:"createdAt"`
 }
 
 type PageInfo struct {
-	Revision       PageRevision  `json:"revision"`
-	V              int           `json:"__v"`
-	RedirectTo     interface{}   `json:"redirectTo"`
-	UpdatedAt      time.Time     `json:"updatedAt"`
-	LastUpdateUser interface{}   `json:"lastUpdateUser"`
-	Creator        interface{}   `json:"creator"`
-	Path           string        `json:"path"`
-	ID             string        `json:"_id"`
-	CreatedAt      time.Time     `json:"createdAt"`
-	CommentCount   int           `json:"commentCount"`
-	SeenUsers      []interface{} `json:"seenUsers"`
-	Liker          []interface{} `json:"liker"`
-	GrantedUsers   []string      `json:"grantedUsers"`
-	Grant          int           `json:"grant"`
-	Status         string        `json:"status"`
-	Extended       PageExtended  `json:"extended,omitempty"`
+	Revision       PageRevision `json:"revision"`
+	V              int          `json:"__v"`
+	RedirectTo     string       `json:"redirectTo"`
+	UpdatedAt      time.Time    `json:"updatedAt"`
+	LastUpdateUser string       `json:"lastUpdateUser"`
+	Creator        string       `json:"creator"`
+	Path           string       `json:"path"`
+	ID             string       `json:"_id"`
+	CreatedAt      time.Time    `json:"createdAt"`
+	CommentCount   int          `json:"commentCount"`
+	SeenUsers      []string     `json:"seenUsers"`
+	Liker          []string     `json:"liker"`
+	GrantedUsers   []string     `json:"grantedUsers"`
+	Grant          int          `json:"grant"`
+	Status         string       `json:"status"`
+	Extended       PageExtended `json:"extended,omitempty"`
+}
+
+type PageDetail struct {
+	Revision       PageRevision `json:"revision"`
+	V              int          `json:"__v"`
+	RedirectTo     string       `json:"redirectTo"`
+	UpdatedAt      time.Time    `json:"updatedAt"`
+	LastUpdateUser Author       `json:"lastUpdateUser"`
+	Creator        Author       `json:"creator"`
+	Path           string       `json:"path"`
+	ID             string       `json:"_id"`
+	CreatedAt      time.Time    `json:"createdAt"`
+	CommentCount   int          `json:"commentCount"`
+	SeenUsers      []string     `json:"seenUsers"`
+	Liker          []string     `json:"liker"`
+	GrantedUsers   []string     `json:"grantedUsers"`
+	Grant          int          `json:"grant"`
+	Status         string       `json:"status"`
+	Extended       PageExtended `json:"extended,omitempty"`
 }
 
 type PageRevision struct {
-	ID        string      `json:"_id"`
-	Author    interface{} `json:"author"`
-	Body      string      `json:"body"`
-	Path      string      `json:"path"`
-	V         int         `json:"__v"`
-	CreatedAt time.Time   `json:"createdAt"`
-	Format    string      `json:"format"`
+	ID        string    `json:"_id"`
+	Author    Author    `json:"author"`
+	Body      string    `json:"body"`
+	Path      string    `json:"path"`
+	V         int       `json:"__v"`
+	CreatedAt time.Time `json:"createdAt"`
+	Format    string    `json:"format"`
 }
 
 type PageExtended struct {

@@ -31,6 +31,7 @@ type Client struct {
 
 	Pages       *PagesService
 	Attachments *AttachmentsService
+	Revisions   *RevisionsService
 }
 
 type service struct {
@@ -71,6 +72,7 @@ func NewClient(cfg Config) (*Client, error) {
 	c.common.client = c
 	c.Pages = (*PagesService)(&c.common)
 	c.Attachments = (*AttachmentsService)(&c.common)
+	c.Revisions = (*RevisionsService)(&c.common)
 
 	return c, nil
 }
